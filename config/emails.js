@@ -1,7 +1,7 @@
 module.exports = {
     emails: {
         backend: 'sendgrid',
-        from: 'Josh <josh@getstream.io>',
+        from: 'Matt <matt@treeb.io>',
         // docs: https://github.com/ghaiklor/sails-service-mailer
         provider: {
             auth: {
