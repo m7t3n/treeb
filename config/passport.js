@@ -1,6 +1,5 @@
 var passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
-    FacebookStrategy = require('passport-facebook'),
     bcrypt = require('bcrypt')
 
 let config = {
@@ -77,32 +76,3 @@ passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
 
 }))
 
-passport.use(new FacebookStrategy({
-    clientID: process.env.FACEBOOK_API_KEY,
-    clientSecret: process.env.FACEBOOK_API_SECRET,
-    callbackURL: process.env.FACEBOOK_CALLBACK_URI,
-    profileFields: ['id', 'email'],
-}, function(accessToken, refreshToken, profile, done) {
-
-    Users.findOrCreate({
-        email: profile.emails[0].value
-    }, {
-        email: profile.emails[0].value,
-        facebookId: profile.id
-    }, function (err, user) {
-
-        if (err || !user) {
-            if (!_.isEmpty(sails.sentry)) {
-                sails.sentry.captureMessage(err)
-                return done(err)
-            } else {
-                sails.log.warn(err)
-                return done(err)
-            }
-        }
-
-        return done(null, user)
-
-    })
-
-}))

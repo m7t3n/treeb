@@ -81,6 +81,4 @@ module.exports.routes = {
   'post /api/like': 'LikeController.addLike',
   'delete /api/like': 'LikeController.deleteLike',
 
-  'get /api/auth/facebook': 'AuthController.facebookAuth',
-
 };
